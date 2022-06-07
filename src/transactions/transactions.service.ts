@@ -33,28 +33,30 @@ export class TransactionsService {
       currentYear < finalYear;
       currentYear++
     ) {
-      data.response.docs.map(async (transaction) => {
-        if (
-          transaction.transaction_transaction_date_iso_date[0]
-            .toString()
-            .includes(currentYear.toString())
-        ) {
-          const transactionToSave = {
-            recipeCountry: transaction.recipient_country_code[0],
-            amount: transaction.transaction_value[0],
-            organization: transaction.reporting_org_narrative[0],
-            transactionDate:
-              transaction.transaction_transaction_date_iso_date[0],
-          };
+      Promise.all(
+        data.response.docs.map((transaction) => {
+          if (
+            transaction.transaction_transaction_date_iso_date[0]
+              .toString()
+              .includes(currentYear.toString())
+          ) {
+            const transactionToSave = {
+              recipeCountry: transaction.recipient_country_code[0],
+              amount: transaction.transaction_value[0],
+              organization: transaction.reporting_org_narrative[0],
+              transactionDate:
+                transaction.transaction_transaction_date_iso_date[0],
+            };
 
-          // await this.create(transactionToSave);
+            this.create(transactionToSave);
 
-          response[currentYear] = { ...response[currentYear] };
-          response[currentYear][
-            `${transaction.reporting_org_narrative[0]} ${transaction.transaction_transaction_date_iso_date[0]}`
-          ] = transaction.transaction_value[0];
-        }
-      });
+            response[currentYear] = { ...response[currentYear] };
+            response[currentYear][
+              `${transaction.reporting_org_narrative[0]} ${transaction.transaction_transaction_date_iso_date[0]}`
+            ] = transaction.transaction_value[0];
+          }
+        }),
+      );
     }
 
     return response;
