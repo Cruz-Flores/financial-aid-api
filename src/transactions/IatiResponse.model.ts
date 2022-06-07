@@ -1,4 +1,4 @@
-export interface Transaction {
+export interface IatiResponse {
   responseHeader: ResponseHeader;
   response: Response;
 }
@@ -36,35 +36,35 @@ export interface Doc {
   description_narrative: string[];
   other_identifier_type?: string[];
   participating_org_ref?: string[];
-  activity_date_iso_date: string[];
+  activity_date_iso_date: Date[];
   default_flow_type_code?: string;
   participating_org_role: string[];
   recipient_country_code: string[];
-  budget_value_value_date?: string[];
+  budget_value_value_date?: Date[];
   reporting_org_narrative: string[];
   default_tied_status_code?: string;
   default_finance_type_code?: string;
-  budget_period_end_iso_date?: string[];
+  budget_period_end_iso_date?: Date[];
   policy_marker_significance?: string[];
   document_link_category_code?: string[];
   document_link_language_code?: string[];
   participating_org_narrative: string[];
   recipient_country_narrative?: string[];
-  budget_period_start_iso_date?: string[];
-  transaction_value_value_date: string[];
+  budget_period_start_iso_date?: Date[];
+  transaction_value_value_date: Date[];
   document_link_title_narrative?: string[];
   transaction_transaction_type_code: string[];
-  transaction_transaction_date_iso_date: string[];
+  transaction_transaction_date_iso_date: Date[];
   xml_lang?: string;
   hierarchy?: number;
   budget_type?: string[];
   description_type?: string[];
   related_activity_ref?: string[];
   budget_value_currency?: string[];
-  last_updated_datetime?: string;
+  last_updated_datetime?: Date;
   related_activity_type?: string[];
   participating_org_type?: string[];
-  dataset_generated_datetime?: string;
+  dataset_generated_datetime?: Date;
   transaction_value_currency?: string[];
   transaction_provider_org_ref?: string[];
   transaction_receiver_org_ref?: string[];
@@ -81,7 +81,7 @@ export interface Doc {
   conditions_attached?: boolean;
   contact_info_website?: string[];
   location_point_srsName?: string[];
-  activity_date_narrative?: string[];
+  activity_date_narrative?: Date[];
   collaboration_type_code?: string;
   humanitarian_scope_code?: string[];
   humanitarian_scope_type?: string[];

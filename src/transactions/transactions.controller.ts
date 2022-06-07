@@ -1,5 +1,5 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { TransactionParamsDto } from './transactionsParams.dto';
+import { QueryYearDto } from './dtos/queryYear.dto';
 import { TransactionsService } from './transactions.service';
 import { map } from 'rxjs/operators';
 import { lastValueFrom } from 'rxjs';
@@ -8,7 +8,7 @@ import { lastValueFrom } from 'rxjs';
 export class TransactionsController {
   constructor(private transactionsService: TransactionsService) {}
   @Get('/')
-  async get(@Query() payload: TransactionParamsDto) {
+  async get(@Query() payload: QueryYearDto) {
     const { year: yearToQuery } = payload;
     const transactions = await lastValueFrom(
       this.transactionsService.get(yearToQuery).pipe(map((resp) => resp.data)),

@@ -17,6 +17,7 @@ import config from 'src/config';
           username: user,
           password,
           database: dbName,
+          autoLoadEntities: true,
         };
       },
     }),
